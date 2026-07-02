@@ -13,16 +13,11 @@ import notificationRoutes from "./routes/notification.routes.js";
 
 const app = express();
 
-// ==================== CORS CONFIG ====================
+// ==================== TEMPORARY CORS CONFIG ====================
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      process.env.CLIENT_URL,
-    ].filter(Boolean),
+    origin: true,
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
