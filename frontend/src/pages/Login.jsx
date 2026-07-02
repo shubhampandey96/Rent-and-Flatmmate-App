@@ -26,7 +26,7 @@ export default function Login() {
       setLoading(true);
 
       const res = await axios.post(
-        "http://localhost:8000/api/auth/login",
+        "https://rent-and-flatmate-backend.onrender.com/api/auth/login",
         formData
       );
 

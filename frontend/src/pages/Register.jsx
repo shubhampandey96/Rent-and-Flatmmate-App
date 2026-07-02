@@ -27,7 +27,7 @@ export default function Register() {
       setLoading(true);
 
       await axios.post(
-        "http://localhost:8000/api/auth/register",
+        "https://rent-and-flatmate-backend.onrender.com/api/auth/register",
         formData
       );
 

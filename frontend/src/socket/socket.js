@@ -1,7 +1,7 @@
 import { io } from "socket.io-client";
 
 const socket = io(
-  "http://localhost:8000",
+  "https://rent-and-flatmate-backend.onrender.com",
   {
     autoConnect: false,
   }
