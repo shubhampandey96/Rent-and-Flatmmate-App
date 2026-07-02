@@ -17,11 +17,11 @@ const app = express();
 app.use(
   cors({
     origin: [
-      "http://localhost:5173", // Local frontend
-      process.env.CLIENT_URL, // Vercel frontend
-    ],
+      "http://localhost:5173",
+      process.env.CLIENT_URL,
+    ].filter(Boolean),
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
@@ -40,36 +40,30 @@ app.get("/", (req, res) => {
 });
 
 // ==================== ROUTES ====================
-
-// Authentication Routes
 app.use("/api/auth", authRoutes);
-
-// Listings Routes
 app.use("/api/listings", listingRoutes);
-
-// Tenant Profile Routes
 app.use("/api/profile", tenantProfileRoutes);
-
-// Chat Routes
 app.use("/api/chat", chatRoutes);
-
-// Compatibility Routes
 app.use("/api/compatibility", compatibilityRoutes);
-
-// Interest Routes
 app.use("/api/interests", interestRoutes);
-
-// Notification Routes
 app.use("/api/notifications", notificationRoutes);
-
-// Admin Routes
 app.use("/api/admin", adminRoutes);
 
 // ==================== 404 HANDLER ====================
-app.use("*", (req, res) => {
+app.use((req, res) => {
   res.status(404).json({
     success: false,
     message: "Route not found",
+  });
+});
+
+// ==================== GLOBAL ERROR HANDLER ====================
+app.use((err, req, res, next) => {
+  console.error("Server Error:", err);
+
+  res.status(err.status || 500).json({
+    success: false,
+    message: err.message || "Internal Server Error",
   });
 });
 
