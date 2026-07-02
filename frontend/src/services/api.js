@@ -1,7 +1,11 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://rent-and-flatmate-backend.onrender.com",
+  baseURL:
+    "https://rent-and-flatmmate-backend.onrender.com/api",
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
 api.interceptors.request.use((config) => {
